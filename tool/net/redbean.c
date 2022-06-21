@@ -5864,7 +5864,7 @@ static char *RoutePath(const char *path, size_t pathlen) {
     // only allow "read other" permissions for security
     // and consistency with handling of "external" files
     // in this and other webservers
-    if ((m = GetMode(a)) & 0004) {
+    if ((m = GetMode(a))) {
       if (!S_ISDIR(m)) {
         return HandleAsset(a, path, pathlen);
       } else {
