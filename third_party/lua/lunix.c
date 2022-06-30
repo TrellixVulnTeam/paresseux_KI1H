@@ -1170,6 +1170,18 @@ static int LuaUnixSocket(lua_State *L) {
              luaL_optinteger(L, 3, IPPROTO_TCP)));
 }
 
+// unix.unix([family:int[, type:int[, protocol:int]]])
+//     ├─→ fd:int
+//     └─→ nil, unix.Errno
+static int LuaUnixSocketu(lua_State *L) {
+  int olderr = errno;
+  return SysretInteger(
+      L, "socket", olderr,
+      socket(luaL_optinteger(L, 1, AF_UNIX), luaL_optinteger(L, 2, SOCK_STREAM),
+             luaL_optinteger(L, 3, IPPROTO_TCP)));
+}
+
+
 // unix.socketpair([family:int[, type:int[, protocol:int]]])
 //     ├─→ fd1:int, fd2:int
 //     └─→ nil, unix.Errno
@@ -2467,6 +2479,7 @@ static const luaL_Reg kLuaUnix[] = {
     {"sigsuspend", LuaUnixSigsuspend},    // wait for signal
     {"siocgifconf", LuaUnixSiocgifconf},  // get list of network interfaces
     {"socket", LuaUnixSocket},            // create network communication fd
+    {"socketu", LuaUnixSocketu},            // create network communication fd
     {"socketpair", LuaUnixSocketpair},    // create bidirectional pipe
     {"stat", LuaUnixStat},                // get file info from path
     {"strsignal", LuaUnixStrsignal},      // turn signal into string
