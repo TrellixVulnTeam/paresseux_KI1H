@@ -1170,18 +1170,6 @@ static int LuaUnixSocket(lua_State *L) {
              luaL_optinteger(L, 3, IPPROTO_TCP)));
 }
 
-// unix.unix([family:int[, type:int[, protocol:int]]])
-//     ├─→ fd:int
-//     └─→ nil, unix.Errno
-static int LuaUnixSocketu(lua_State *L) {
-  int olderr = errno;
-  return SysretInteger(
-      L, "socket", olderr,
-      socket(luaL_optinteger(L, 1, AF_UNIX), luaL_optinteger(L, 2, SOCK_STREAM),
-             luaL_optinteger(L, 3, IPPROTO_TCP)));
-}
-
-
 // unix.socketpair([family:int[, type:int[, protocol:int]]])
 //     ├─→ fd1:int, fd2:int
 //     └─→ nil, unix.Errno
