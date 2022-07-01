@@ -2467,7 +2467,6 @@ static const luaL_Reg kLuaUnix[] = {
     {"sigsuspend", LuaUnixSigsuspend},    // wait for signal
     {"siocgifconf", LuaUnixSiocgifconf},  // get list of network interfaces
     {"socket", LuaUnixSocket},            // create network communication fd
-    {"socketu", LuaUnixSocketu},            // create network communication fd
     {"socketpair", LuaUnixSocketpair},    // create bidirectional pipe
     {"stat", LuaUnixStat},                // get file info from path
     {"strsignal", LuaUnixStrsignal},      // turn signal into string
